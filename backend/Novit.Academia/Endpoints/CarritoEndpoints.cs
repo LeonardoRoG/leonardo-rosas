@@ -11,9 +11,9 @@ public class CarritoEndpoints : ICarterModule
 
         app.MapGet("/", (AppDbContext context) =>
         {
+            var carritos = context.Carritos.ToList();
 
-
-            return Results.Ok();
+            return Results.Ok(carritos);
         }).WithTags("Carrito");
 
         app.MapGet("/{idCarrito}", (int idCarrito) => 
