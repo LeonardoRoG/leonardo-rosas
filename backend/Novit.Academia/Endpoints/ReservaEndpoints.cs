@@ -1,4 +1,5 @@
 ﻿using Carter;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Novit.Academia.Database;
 using Novit.Academia.Domain;
@@ -39,12 +40,19 @@ public class ReservaEndpoints : ICarterModule
             var producto = context.Productos.FirstOrDefault(p => p.IdProducto == idProducto);
             if (producto == null)
                 return Results.BadRequest($"IdProducto {idProducto} no existe.");
-            producto.Estado = reservaDto.Producto.Estado;
+
+            if (reservaDto.EstadoReserva == EstadoReserva.Ingresada)
+                producto.Estado = Estado.Reservado;
+            if (reservaDto.EstadoReserva == EstadoReserva.Cancelada | reservaDto.EstadoReserva == EstadoReserva.Rechazada)
+                producto.Estado = Estado.Disponible;
+            if (reservaDto.EstadoReserva == EstadoReserva.Aprobada)
+                producto.Estado = Estado.Vendido;
+
             Reserva reserva = new()
             {
                 Cliente = reservaDto.Cliente,
                 Producto = producto,
-                EstadoReserva = EstadoReserva.Ingresada
+                EstadoReserva = reservaDto.EstadoReserva
             };
             
             context.Reservas.Add( reserva );
@@ -66,15 +74,26 @@ public class ReservaEndpoints : ICarterModule
             return Results.Ok();
         }).WithTags("Reserva");
         
-        app.MapPut("/{idReserva:int}", (AppDbContext context, int idReserva, ReservaDto reservaDto) =>
+        app.MapPut("/{idReserva:int}", (AppDbContext context, int idReserva, [FromBody] ReservaDto reservaDto) =>
         {
-            var reserva = context.Reservas.FirstOrDefault(r => r.IdReserva == idReserva);
+            var reserva = context.Reservas.Where(r => r.IdReserva == idReserva)
+                .Include(p => p.Producto)
+                .FirstOrDefault();
+
             if (reserva == null)
                 return Results.BadRequest($"IdReserva {idReserva} no existe.");
 
-            reserva.Cliente = reservaDto.Cliente;
             reserva.EstadoReserva = reservaDto.EstadoReserva;
-            // TODO: ifs de los casos de estadoReserva para modificar estado del producto
+            reserva.Cliente = reservaDto.Cliente;
+
+            if (reservaDto.EstadoReserva == EstadoReserva.Ingresada)
+                reserva.Producto.Estado = Estado.Reservado;
+            if (reservaDto.EstadoReserva == EstadoReserva.Cancelada | reservaDto.EstadoReserva == EstadoReserva.Rechazada)
+                reserva.Producto.Estado = Estado.Disponible;
+            if (reservaDto.EstadoReserva == EstadoReserva.Aprobada)
+                reserva.Producto.Estado = Estado.Vendido;
+            
+            context.SaveChanges();
 
             return Results.Ok();
         }).WithTags("Reserva");
