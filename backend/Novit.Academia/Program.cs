@@ -14,7 +14,6 @@ builder.Services.AddCarter();
 builder.Services.AddCors(options =>
     options.AddPolicy("Academia2024", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
-// Agrego el dbcontext
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(config.GetConnectionString("AppDb")));
 
 var app = builder.Build();

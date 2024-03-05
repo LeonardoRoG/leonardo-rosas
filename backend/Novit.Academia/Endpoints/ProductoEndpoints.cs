@@ -1,5 +1,4 @@
 ﻿using Carter;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Novit.Academia.Database;
 using Novit.Academia.Domain;
 using Novit.Academia.Endpoints.DTO;
@@ -12,62 +11,55 @@ public class ProductoEndpoints : ICarterModule
     {
         var app = routes.MapGroup("/api/Producto");
 
-        // GET - Obtener lista de productos
         app.MapGet("/", (AppDbContext context) =>
         {
             var productos = context.Productos.Select(p => p.ConvertToProductoDto());
             return Results.Ok(productos);
         }).WithTags("Producto");
 
-        // GET - Obtener un producto según su id
-        app.MapGet("/{idProducto}", (AppDbContext context,int idProducto) =>
+        app.MapGet("/{idProducto:int}", (AppDbContext context ,int idProducto) =>
         {
             var producto = context.Productos.Where(p => p.IdProducto == idProducto).Select(p => p.ConvertToProductoDto());
+
             return Results.Ok(producto);
         }).WithTags("Producto");
 
-        // POST - Crear un producto nuevo
         app.MapPost("/", (AppDbContext context, ProductoDto productoDto) =>
         {
-            Producto producto = new() { 
-                Nombre = productoDto.Nombre,
-                Descripcion = productoDto.Descripcion,
+            Producto producto = new()
+            {
+                Codigo = productoDto.Codigo,
+                Barrio = productoDto.Barrio,
                 Precio = productoDto.Precio,
-                Stock = productoDto.Stock,
                 UrlImagen = productoDto.UrlImagen,
             };
-
             context.Productos.Add(producto);
             context.SaveChanges();
+
             return Results.Created();
         }).WithTags("Producto");
 
-        // PUT - Modificar un producto
-        app.MapPut("/{idProducto}", (AppDbContext context,int idProducto, ProductoDto productoDto) =>
+        app.MapPut("/{idProducto}", (AppDbContext context ,int idProducto, ProductoDto productoDto) =>
         {
             var producto = context.Productos.FirstOrDefault(p => p.IdProducto == idProducto);
-
             if (producto == null)
-                return Results.BadRequest();
+                return Results.BadRequest($"IdProducto {idProducto} no existe.");
 
-            producto.Nombre = productoDto.Nombre;
-            producto.Descripcion = productoDto.Descripcion;
-            producto.Stock = productoDto.Stock;
-            producto.UrlImagen = productoDto.UrlImagen;
+            producto.Codigo = productoDto.Codigo;
+            producto.Barrio = productoDto.Barrio;
             producto.Precio = productoDto.Precio;
+            producto.UrlImagen = productoDto.UrlImagen;
 
             context.SaveChanges();
 
             return Results.Ok();
         }).WithTags("Producto");
 
-        // DELETE - Eliminar un producto
-        app.MapDelete("/{idProducto}", (AppDbContext context ,int idProducto) =>
+        app.MapDelete("/{idProducto}", (AppDbContext context,int idProducto) =>
         {
             var producto = context.Productos.FirstOrDefault(p => p.IdProducto == idProducto);
-
             if (producto == null)
-                return Results.BadRequest();
+                return Results.BadRequest($"IdProducto {idProducto} no existe.");
 
             context.Productos.Remove(producto);
             context.SaveChanges();

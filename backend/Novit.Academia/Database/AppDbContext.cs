@@ -5,17 +5,9 @@ namespace Novit.Academia.Database
 {
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        // Forma Clasica con constructor
-        //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        //{
-
-        //}
-
         public DbSet<Producto> Productos { get; set; }
 
-        public DbSet<ItemCarrito> Items { get; set; }
-
-        public DbSet<Carrito> Carritos { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,25 +15,25 @@ namespace Novit.Academia.Database
                 new Producto
                 {
                     IdProducto = 1,
-                    Nombre = "Fideo",
-                    Precio = 550,
-                    Stock = 400
+                    Codigo = "H3730BAN125",
+                    Barrio = "San Martin",
+                    Precio = 7200000
                 },
                 new Producto
                 {
                     IdProducto = 2,
-                    Nombre = "Arroz",
-                    Precio = 900,
-                    Stock = 350
+                    Codigo = "H3500BSN322",
+                    Barrio = "Belgrano",
+                    Precio = 16500000
                 },
                 new Producto
                 {
                     IdProducto = 3,
-                    Nombre = "Raviol",
-                    Precio = 1600,
-                    Stock = 120
-                }
-                );
+                    Codigo = "H2575CPA777",
+                    Barrio = "Pellegrini",
+                    Precio = 14000000
+                });
         }
+
     }
 }

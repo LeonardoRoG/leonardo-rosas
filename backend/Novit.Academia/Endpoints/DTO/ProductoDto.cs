@@ -1,12 +1,15 @@
-﻿namespace Novit.Academia.Endpoints.DTO;
+﻿using Novit.Academia.Domain;
 
-//public class ProductoDto
-//{
-//    public required string Nombre { get; set; }
-//    public string? Descripcion { get; set; }
-//    public required decimal Precio { get; set; }
-//    public string? UrlImagen { get; set; }
-//    public int Stock { get; set; } = 0;
-//}
+namespace Novit.Academia.Endpoints.DTO;
 
-public record ProductoDto(string Nombre, string Descripcion, decimal Precio, string? UrlImagen, int Stock);
+public record ProductoDto
+(
+    string Codigo,
+    string Barrio,
+    decimal Precio,
+    string? UrlImagen
+);
+
+public record ProductoReservaDto(
+    Estado Estado
+    );

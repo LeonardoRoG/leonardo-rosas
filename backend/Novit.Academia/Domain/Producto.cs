@@ -9,18 +9,22 @@ public class Producto
     [Key]
     public int IdProducto { get; set; }
 
-    [StringLength(30)]
-    public required string Nombre { get; set; }
+    public required string Codigo { get; set; }
 
-    [StringLength(50)]
-    public string? Descripcion { get; set; }
+    [StringLength(30)]
+    public required string Barrio { get; set; }
 
     public required decimal Precio { get; set; }
 
     [StringLength(200)]
     public string? UrlImagen { get; set; }
 
-    public int Stock { get; set; } = 0;
+    public Estado Estado { get; set; }
+}
 
-    public List<ItemCarrito> Items { get; set; } = [];
+public enum Estado
+{
+    Disponible,
+    Reservado,
+    Vendido
 }
