@@ -1,2 +1,25 @@
 <h1>{{title}}</h1>
 <p>producto works!</p>
+
+<div>
+    <button type="button" routerLink="/producto/nuevo">
+        Agregar nuevo
+    </button>
+
+</div>
+
+<ul>
+    @for (item of productosList; track $index){
+        <div class="flexbox">
+            <div>
+                <h3>{{item.codigo}}</h3>
+                <p>Barrio: {{item.barrio}} | Estado: {{item.estado}}</p>
+            </div>
+            <div>
+                <h3>Precio: {{item.precio}}</h3>
+                <button>Reservar</button>
+            </div>
+        </div>
+        <hr>
+    }
+</ul>

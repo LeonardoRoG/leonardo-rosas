@@ -3,12 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReservaComponent } from './reserva.component';
 import { ReservaDetalleComponent } from './reserva-detalle/reserva-detalle.component';
 import { NuevaReservaComponent } from './nueva-reserva/nueva-reserva.component';
+import { IndexComponent } from './index/index.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
-    path: 'reservas',
-    component: ReservaComponent,
+    path: '',
+    component: IndexComponent,
     children: [
+      {
+        path: 'reservas',
+        component: ReservaComponent
+      },
       {
         path: 'detalles',
         component: ReservaDetalleComponent

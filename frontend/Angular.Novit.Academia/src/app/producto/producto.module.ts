@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { routes } from './producto-routing';
 import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
 import { NuevoProductoComponent } from './nuevo-producto/nuevo-producto.component';
 import { ProductoComponent } from './producto.component';
 import { RouterModule } from '@angular/router';
-
+import { routes } from './producto-routing';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
   declarations: [
     ProductoDetalleComponent,
     NuevoProductoComponent,
     ProductoComponent,
+    IndexComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
   exports: [
     ProductoDetalleComponent,

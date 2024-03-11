@@ -5,13 +5,15 @@ import { ReservaRoutingModule } from './reserva-routing';
 import { ReservaComponent } from './reserva.component';
 import { ReservaDetalleComponent } from './reserva-detalle/reserva-detalle.component';
 import { NuevaReservaComponent } from './nueva-reserva/nueva-reserva.component';
+import { IndexComponent } from './index/index.component';
 
 
 @NgModule({
   declarations: [
     ReservaComponent,
     ReservaDetalleComponent,
-    NuevaReservaComponent
+    NuevaReservaComponent,
+    IndexComponent
   ],
   imports: [
     CommonModule,

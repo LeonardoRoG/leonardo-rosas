@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { IProducto } from './interface/producto.interface';
+import { ProductoService } from './producto.service';
 
 @Component({
   selector: 'app-producto',
@@ -7,5 +9,13 @@ import { Component } from '@angular/core';
 })
 export class ProductoComponent {
 
-  title: string = "Productos"
+  title: string = 'Productos'
+
+  productosList: IProducto[] = [];
+  productosService: ProductoService = inject(ProductoService);
+
+  constructor(){
+    this.productosList = this.productosService.obtenerProductos();
+  }
+
 }

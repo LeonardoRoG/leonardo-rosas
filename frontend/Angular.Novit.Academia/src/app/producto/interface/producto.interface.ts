@@ -1,13 +1,13 @@
-export interface Producto{
+export interface IProducto{
     id: number;
     codigo: string;
     barrio: string;
     precio: number;
     urlImagen: string;
-    estado: estado;
+    estado: EEstado;
 }
 
-enum estado{
+export enum EEstado{
     Disponible = 'Disponible',
     Reservada = 'Reservada',
     Vendida = 'Vendida'

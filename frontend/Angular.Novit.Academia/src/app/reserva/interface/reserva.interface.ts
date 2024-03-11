@@ -1,10 +1,11 @@
-export interface Reserva{
+export interface IReserva{
     id: number;
     cliente: string;
-    estadoReserva: estadoReserva;
+    productoId: number;
+    estadoReserva: EEstadoReserva;
 }
 
-enum estadoReserva{
+export enum EEstadoReserva{
     Ingresada = 'Ingresada',
     Aprobada = 'Aprobada',
     Cancelada = 'Cancelada',
