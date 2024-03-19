@@ -2,8 +2,6 @@
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Novit.Academia.Database.Migrations
 {
     /// <inheritdoc />
@@ -13,13 +11,39 @@ namespace Novit.Academia.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Barrio",
+                columns: table => new
+                {
+                    IdBarrio = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nombre = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Barrio", x => x.IdBarrio);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cliente",
+                columns: table => new
+                {
+                    IdCliente = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nombre = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cliente", x => x.IdCliente);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Producto",
                 columns: table => new
                 {
                     IdProducto = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Codigo = table.Column<string>(type: "TEXT", nullable: false),
-                    Barrio = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
+                    IdBarrio = table.Column<int>(type: "INTEGER", nullable: false),
                     Precio = table.Column<decimal>(type: "TEXT", nullable: false),
                     UrlImagen = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
                     Estado = table.Column<int>(type: "INTEGER", nullable: false)
@@ -27,6 +51,12 @@ namespace Novit.Academia.Database.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Producto", x => x.IdProducto);
+                    table.ForeignKey(
+                        name: "FK_Producto_Barrio_IdBarrio",
+                        column: x => x.IdBarrio,
+                        principalTable: "Barrio",
+                        principalColumn: "IdBarrio",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,13 +65,19 @@ namespace Novit.Academia.Database.Migrations
                 {
                     IdReserva = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Cliente = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    IdCliente = table.Column<int>(type: "INTEGER", nullable: false),
                     IdProducto = table.Column<int>(type: "INTEGER", nullable: false),
                     EstadoReserva = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reserva", x => x.IdReserva);
+                    table.ForeignKey(
+                        name: "FK_Reserva_Cliente_IdCliente",
+                        column: x => x.IdCliente,
+                        principalTable: "Cliente",
+                        principalColumn: "IdCliente",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reserva_Producto_IdProducto",
                         column: x => x.IdProducto,
@@ -50,15 +86,15 @@ namespace Novit.Academia.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
+            migrationBuilder.CreateIndex(
+                name: "IX_Producto_IdBarrio",
                 table: "Producto",
-                columns: new[] { "IdProducto", "Barrio", "Codigo", "Estado", "Precio", "UrlImagen" },
-                values: new object[,]
-                {
-                    { 1, "San Martin", "H3730BAN125", 0, 7200000m, null },
-                    { 2, "Belgrano", "H3500BSN322", 0, 16500000m, null },
-                    { 3, "Pellegrini", "H2575CPA777", 0, 14000000m, null }
-                });
+                column: "IdBarrio");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reserva_IdCliente",
+                table: "Reserva",
+                column: "IdCliente");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reserva_IdProducto",
@@ -73,7 +109,13 @@ namespace Novit.Academia.Database.Migrations
                 name: "Reserva");
 
             migrationBuilder.DropTable(
+                name: "Cliente");
+
+            migrationBuilder.DropTable(
                 name: "Producto");
+
+            migrationBuilder.DropTable(
+                name: "Barrio");
         }
     }
 }

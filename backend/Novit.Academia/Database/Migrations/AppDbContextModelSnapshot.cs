@@ -16,22 +16,52 @@ namespace Novit.Academia.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
 
+            modelBuilder.Entity("Novit.Academia.Domain.Barrio", b =>
+                {
+                    b.Property<int>("IdBarrio")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("IdBarrio");
+
+                    b.ToTable("Barrio");
+                });
+
+            modelBuilder.Entity("Novit.Academia.Domain.Cliente", b =>
+                {
+                    b.Property<int>("IdCliente")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("IdCliente");
+
+                    b.ToTable("Cliente");
+                });
+
             modelBuilder.Entity("Novit.Academia.Domain.Producto", b =>
                 {
                     b.Property<int>("IdProducto")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Barrio")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Estado")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdBarrio")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Precio")
@@ -43,33 +73,9 @@ namespace Novit.Academia.Database.Migrations
 
                     b.HasKey("IdProducto");
 
-                    b.ToTable("Producto");
+                    b.HasIndex("IdBarrio");
 
-                    b.HasData(
-                        new
-                        {
-                            IdProducto = 1,
-                            Barrio = "San Martin",
-                            Codigo = "H3730BAN125",
-                            Estado = 0,
-                            Precio = 7200000m
-                        },
-                        new
-                        {
-                            IdProducto = 2,
-                            Barrio = "Belgrano",
-                            Codigo = "H3500BSN322",
-                            Estado = 0,
-                            Precio = 16500000m
-                        },
-                        new
-                        {
-                            IdProducto = 3,
-                            Barrio = "Pellegrini",
-                            Codigo = "H2575CPA777",
-                            Estado = 0,
-                            Precio = 14000000m
-                        });
+                    b.ToTable("Producto");
                 });
 
             modelBuilder.Entity("Novit.Academia.Domain.Reserva", b =>
@@ -78,12 +84,10 @@ namespace Novit.Academia.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Cliente")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("EstadoReserva")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdCliente")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("IdProducto")
@@ -91,20 +95,46 @@ namespace Novit.Academia.Database.Migrations
 
                     b.HasKey("IdReserva");
 
+                    b.HasIndex("IdCliente");
+
                     b.HasIndex("IdProducto");
 
                     b.ToTable("Reserva");
                 });
 
+            modelBuilder.Entity("Novit.Academia.Domain.Producto", b =>
+                {
+                    b.HasOne("Novit.Academia.Domain.Barrio", "Barrio")
+                        .WithMany("Productos")
+                        .HasForeignKey("IdBarrio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Barrio");
+                });
+
             modelBuilder.Entity("Novit.Academia.Domain.Reserva", b =>
                 {
+                    b.HasOne("Novit.Academia.Domain.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Novit.Academia.Domain.Producto", "Producto")
                         .WithMany()
                         .HasForeignKey("IdProducto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Cliente");
+
                     b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("Novit.Academia.Domain.Barrio", b =>
+                {
+                    b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618
         }

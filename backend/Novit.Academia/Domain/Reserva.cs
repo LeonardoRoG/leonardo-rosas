@@ -9,13 +9,13 @@ public class Reserva
     [Key]
     public int IdReserva { get; set; }
 
-    [StringLength(50)]
-    public required string Cliente { get; set; }
+    [ForeignKey("IdCliente")]
+    public required Cliente Cliente { get; set; }
 
     [ForeignKey("IdProducto")]
     public required Producto Producto { get; set; }
 
-    public EstadoReserva EstadoReserva { get; set; }
+    public required EstadoReserva EstadoReserva { get; set; }
 }
 
 public enum EstadoReserva

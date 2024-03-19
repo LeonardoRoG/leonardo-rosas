@@ -5,7 +5,7 @@ namespace Novit.Academia
 {
     public static class ExtensionMethods
     {
-        public static ProductoDto ConvertToProductoDto(this Producto p) =>
-            new(p.Codigo, p.Barrio, p.Precio, p.UrlImagen);
+        //public static ProductoDto ConvertToProductoDto(this Producto p) =>
+        //    new(p.Codigo, p.Barrio, p.Precio, p.UrlImagen);
     }
 }
