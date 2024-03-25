@@ -2,4 +2,31 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border: 2px solid gainsboro;
+    border-radius: 10px;
+}
+
+.container-grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.container-item{
+    border-radius: 15px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container{
+    margin: auto 5px;
+}
+
+.item-title{
+    text-decoration: none;
+    font-weight: bold;
 }

@@ -1,13 +1,37 @@
-<p>nuevo-producto works!</p>
 
-<form>
-    <label for="id">Id:</label>
-    <input id="id" type="number">
-    <label for="name">Nombre:</label>
-    <input id="name" type="text">
-    <label for="categoria">Categoria:</label>
-    <input id="categoria" type="text">
-    <label for="stock">Stock:</label>
-    <input id="stock" type="number">
-    <button mat-raised-button color="primary">Agregar al carrito</button>
+<h1>Nuevo Producto</h1>
+<mat-divider></mat-divider>
+<h3>Ingrese los datos del producto a agregar: </h3>
+<br>
+<form [formGroup]="productoForm" (ngSubmit)="agregarProducto()" class="login-form">
+  <div>
+    <mat-form-field class="item-login-form">
+      <mat-label>Código del producto:</mat-label>
+      <input matInput id="codigo" type="text" formControlName="codigo" required/>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field formGroupName="barrio" class="item-login-form">
+      <mat-label >Barrio:</mat-label>
+      <input matInput id="barrio" type="text" formControlName="nombre" required/>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="item-login-form">
+      <mat-label>Precio:</mat-label>
+      <input matInput id="precio" type="number" formControlName="precio" required/>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="item-login-form">
+      <mat-label>Imagen:</mat-label>
+      <input matInput id="urlImagen" type="text" formControlName="urlImagen" required/>
+    </mat-form-field>
+  </div>
+
+  <div class="button-container">
+    <button type="submit" mat-raised-button color="primary">
+      Agregar producto
+    </button>
+  </div>
 </form>

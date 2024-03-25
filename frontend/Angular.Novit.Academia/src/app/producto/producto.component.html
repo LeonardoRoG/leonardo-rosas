@@ -1,25 +1,30 @@
 <h1>{{title}}</h1>
-<p>producto works!</p>
 
 <div>
-    <button type="button" routerLink="/producto/nuevo">
-        Agregar nuevo
+    <button mat-raised-button color="primary" type="button" routerLink="/producto/nuevo">
+        <mat-icon fontIcon="add"></mat-icon> Agregar nuevo
     </button>
 
 </div>
 
-<ul>
+<ul class="container-grid">
     @for (item of productosList; track $index){
-        <div class="flexbox">
+        <article class="container-item">
             <div>
-                <h3>{{item.codigo}}</h3>
-                <p>Barrio: {{item.barrio}} | Estado: {{item.estado}}</p>
+                <span>
+                    <img style="max-width: 300px; border-radius: 15px;" src="https://cdn.pixabay.com/photo/2023/09/04/10/12/bird-8232427_1280.jpg" alt="Aguila">
+                </span>
+                <div class="container-item">
+                    <a routerLink="producto/detalle/{{item.id}}" class="item-title"><h3>{{item.codigo}}</h3></a>
+                    <p>Barrio: {{item.barrio.nombre}} | Estado: {{mostrarEstado(item.estado)}}</p>
+                    <h3>Precio: {{item.precio}}</h3>
+                </div>
+                <div>
+                    <button class="button-container" mat-raised-button color="primary">Reservar</button>
+                    <button class="button-container" mat-raised-button color="accent">Editar</button>
+                    <button class="button-container" mat-raised-button color="warn">Eliminar</button>
+                </div>
             </div>
-            <div>
-                <h3>Precio: {{item.precio}}</h3>
-                <button>Reservar</button>
-            </div>
-        </div>
-        <hr>
+        </article>
     }
 </ul>

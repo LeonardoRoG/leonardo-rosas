@@ -1,8 +1,6 @@
 ﻿using Carter;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Novit.Academia.Database;
-using Novit.Academia.Domain;
 using Novit.Academia.Endpoints.DTO;
 using Novit.Academia.Service;
 
@@ -19,35 +17,63 @@ public class ReservaEndpoints : ICarterModule
             var reservas = reservaService.GetReservas();
             return Results.Ok(reservas);
 
-        }).WithTags("Reserva");
-        
+        })
+            .WithTags("Reserva")
+            .RequireAuthorization(new AuthorizeAttribute { Roles = "vendedor, comercial" });
+
         app.MapGet("/{idReserva:int}", (IReservaService reservaService, int idReserva) =>
         {
             var reserva = reservaService.GetReserva(idReserva);
             return Results.Ok(reserva);
 
-        }).WithTags("Reserva");
-        
-        app.MapPost("/{idProducto:int}", (IReservaService reservaService, int idProducto , [FromBody] ReservaRequestDto reservaDto) =>
+        })
+            .WithTags("Reserva")
+            .RequireAuthorization(new AuthorizeAttribute { Roles = "vendedor, comercial" });
+
+        app.MapPost("/{idProducto:int}/Producto", (IReservaService reservaService, int idProducto, [FromBody] ReservaRequestDto reservaDto) =>
         {
             var producto = reservaService.AddReserva(idProducto, reservaDto);
             return Results.Ok();
 
-        }).WithTags("Reserva");
-        
-        app.MapDelete("/{idReserva:int}", (IReservaService reservaService, int idReserva) =>
-        {
-            reservaService.RemoveReserva(idReserva);
-            return Results.NoContent();
+        })
+            .WithTags("Reserva")
+            .RequireAuthorization(new AuthorizeAttribute { Roles = "vendedor" });
 
-        }).WithTags("Reserva");
-        
-        app.MapPut("/{idReserva:int}", (IReservaService reservaService, int idReserva, [FromBody] ReservaRequestDto reservaDto) =>
+        app.MapPut("/{idReserva:int}/Cancelar", (IReservaService reservaService, int idReserva) =>
+        {
+            reservaService.CancelReserva(idReserva);
+            return Results.Ok();
+
+        })
+            .WithTags("Reserva")
+            .RequireAuthorization(new AuthorizeAttribute { Roles = "vendedor" });
+
+        app.MapPut("/{idReserva:int}/Rechazar", (IReservaService reservaService, int idReserva) =>
+        {
+            reservaService.RejectReserva(idReserva);
+            return Results.Ok();
+
+        })
+            .WithTags("Reserva")
+            .RequireAuthorization(new AuthorizeAttribute { Roles = "comercial" });
+
+        app.MapPut("/{idReserva:int}/Aprobar", (IReservaService reservaService, int idReserva) =>
+        {
+            reservaService.ApproveReserva(idReserva);
+            return Results.Ok();
+
+        })
+            .WithTags("Reserva")
+            .RequireAuthorization(new AuthorizeAttribute { Roles = "comercial" });
+
+        app.MapPut("/{idReserva:int}/Update", (IReservaService reservaService, int idReserva, [FromBody] ReservaRequestDto reservaDto) =>
         {
             reservaService.UpdateReserva(idReserva, reservaDto);
             return Results.Ok();
 
-        }).WithTags("Reserva");
+        })
+            .WithTags("Reserva")
+            .RequireAuthorization(new AuthorizeAttribute { Roles = "comercial" });
 
     }
 }

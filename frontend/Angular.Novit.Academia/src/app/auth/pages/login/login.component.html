@@ -1,12 +1,23 @@
-<p>login works!</p>
-<form action="">
-    <div>
-        <label for="email">Email:</label>
-        <input id="email" type="email"/>
-    </div>
-    <div>
-        <label for="password">Contraseña:</label>
-        <input id="password" type="password"/>
-    </div>
-    <button>Ingresar</button>
+<br />
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+  <div>
+    <mat-form-field class="item-login-form">
+      <mat-label>Usuario</mat-label>
+      <input matInput formControlName="username" placeholder="Nombre de usuario"/>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="item-login-form">
+      <mat-label>Contraseña</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+    </mat-form-field>
+  </div>
+
+  <div class="button-container">
+    <button type="submit" mat-raised-button color="primary">
+      Iniciar Sesión
+    </button>
+  </div>
+
 </form>

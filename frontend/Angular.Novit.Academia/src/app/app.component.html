@@ -1,34 +1,43 @@
-<header>
+
+<mat-toolbar color="primary">
   <nav class="nav container">
       <div>
           Logo
       </div>
+      @if (this.isAuthenticated){
+        <div>
+            <button mat-flat-button color="primary" routerLink="/index">Inicio</button>
+            <button mat-flat-button color="primary" routerLink="/producto/productos">Productos</button>
+            <button mat-flat-button color="primary" routerLink="/reserva/reservas">Reservas</button>
+        </div>
+      }
       <div>
-          <a class="item-nav" routerLink="./producto">Inicio</a>
-          <a class="item-nav" routerLink="./producto/productos">Productos</a>
-          <a class="item-nav" routerLink="./reserva/reservas">Reservas</a>
-          <a class="item-nav" routerLink="./auth/login">Login</a>
+          @if (this.isAuthenticated) {
+              <button mat-flat-button disabled class="item-nav">{{currentUserLogin?.name}}</button>
+              <button mat-flat-button color="warn" class="item-nav" (click)="logout()" routerLink="/">
+                  <mat-icon fontIcon="logout"></mat-icon> Salir
+              </button>
+          } @else {
+              <button mat-flat-button color="accent" routerLink="/auth">
+                <mat-icon fontIcon="login"></mat-icon> Ingresar
+              </button>
+          }
       </div>
   </nav>
-  
-</header>
+
+</mat-toolbar>
 
 
 <main class="container">
 
   <div>
-      <h1>Main {{title}}</h1>
-      <hr />
-  </div>
-  
-  <div>
-      <p>Inicio router</p>
       <router-outlet></router-outlet>
-      <p>Fin Router</p>
   </div>
 
 </main>
 
-<footer class="container">
-  <h3>Footer</h3>
-</footer>
+<mat-toolbar color="primary">
+  <div class="container">
+      <h3>Footer</h3>
+  </div>
+</mat-toolbar>

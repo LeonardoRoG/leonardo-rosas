@@ -1,1 +1,16 @@
-<p>producto-detalle works!</p>
+
+<div class="flexbox">
+    <span>
+        <img style="max-width: 400px; border-radius: 15px;" src="https://cdn.pixabay.com/photo/2023/09/04/10/12/bird-8232427_1280.jpg" alt="Aguila">
+    </span>
+    <div>
+        <h2>{{this.productoObtenido.codigo}}</h2>
+        <p>Barrio: {{this.productoObtenido.barrio.nombre}} | Estado: {{mostrarEstado(this.productoObtenido.estado)}}</p>
+        <h3>Precio: {{this.productoObtenido.precio}}</h3>
+    </div>
+    <div>
+        <button mat-raised-button color="primary">Reservar</button>
+        <button mat-raised-button>Editar</button>
+        <button mat-raised-button color="warn">Eliminar</button>
+    </div>
+</div>

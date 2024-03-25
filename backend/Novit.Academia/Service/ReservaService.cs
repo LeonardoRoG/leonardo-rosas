@@ -9,7 +9,9 @@ public interface IReservaService
     List<ReservaResponseDto> GetReservas();
     ReservaResponseDto GetReserva(int idReserva);
     int AddReserva(int idProducto, ReservaRequestDto reservaDto);
-    void RemoveReserva(int idReserva);
+    void CancelReserva(int idReserva);
+    void RejectReserva(int idReserva);
+    void ApproveReserva(int idReserva);
     void UpdateReserva(int idReserva, ReservaRequestDto reservaDto);
 }
 
@@ -30,9 +32,19 @@ public class ReservaService(IReservaRepository reservaRepository) : IReservaServ
         return reservaRepository.GetReservas().Adapt<List<ReservaResponseDto>>();
     }
 
-    public void RemoveReserva(int idReserva)
+    public void CancelReserva(int idReserva)
     {
-        reservaRepository.RemoveReserva(idReserva);
+        reservaRepository.CancelReserva(idReserva);
+    }
+    
+    public void RejectReserva(int idReserva)
+    {
+        reservaRepository.RejectReserva(idReserva);
+    }
+    
+    public void ApproveReserva(int idReserva)
+    {
+        reservaRepository.ApproveReserva(idReserva);
     }
 
     public void UpdateReserva(int idReserva, ReservaRequestDto reservaDto)

@@ -16,6 +16,10 @@ public class Reserva
     public required Producto Producto { get; set; }
 
     public required EstadoReserva EstadoReserva { get; set; }
+
+    public bool SolicitarAprobacion { get; set; }
+
+    public required Usuario Usuario { get; set; }
 }
 
 public enum EstadoReserva

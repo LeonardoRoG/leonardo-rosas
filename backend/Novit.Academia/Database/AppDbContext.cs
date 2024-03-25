@@ -13,53 +13,56 @@ namespace Novit.Academia.Database
 
         public DbSet<Cliente> Clientes { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Barrio>()
-        //        .HasMany(e => e.Productos)
-        //        .WithOne(e => e.Barrio)
-        //        .HasForeignKey(e => e.IdBarrio)
-        //        .IsRequired();
+        public DbSet<Usuario> Usuarios { get; set; }
 
-        //    base.OnModelCreating(modelBuilder);
-        //}
+        public DbSet<Rol> Roles { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Barrio>().HasData(
-        //        new Barrio
-        //        {
-        //            IdBarrio = 1,
-        //            Nombre = "San Martin",
-        //        });
-
-        //    modelBuilder.Entity<Producto>().HasData(
-        //        new Producto
-        //        {
-        //            IdProducto = 1,
-        //            Codigo = "H3730BAN125",
-        //            Barrio = ,
-        //            Precio = 7200000,
-        //            Estado = Estado.Disponible,
-        //        },
-        //        new Producto
-        //        {
-        //            IdProducto = 2,
-        //            Codigo = "H4500RSA",
-        //            Barrio = new Barrio() { IdBarrio = 2, Nombre = "Belgrano" },
-        //            Precio = 9000000,
-        //            Estado = Estado.Disponible,
-        //        },
-        //        new Producto
-        //        {
-        //            IdProducto = 3,
-        //            Codigo = "HFJS9930R",
-        //            Barrio = new Barrio() { IdBarrio = 3, Nombre = "Rosario" },
-        //            Precio = 22000000,
-        //            Estado = Estado.Disponible,
-        //        }
-        //        );
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //    modelBuilder.Entity<Producto>().HasData(
+            //        new Producto
+            //        {
+            //            IdProducto = 1,
+            //            Codigo = "H3730BAN125",
+            //            Barrio = new Barrio() { IdBarrio = 1, Nombre = "San Martin" },
+            //            Precio = 72000,
+            //            Estado = Estado.Disponible,
+            //        },
+            //        new Producto
+            //        {
+            //            IdProducto = 2,
+            //            Codigo = "H4500RSA",
+            //            Barrio = new Barrio() { IdBarrio = 2, Nombre = "Belgrano" },
+            //            Precio = 90000,
+            //            Estado = Estado.Disponible,
+            //        },
+            //        new Producto
+            //        {
+            //            IdProducto = 3,
+            //            Codigo = "HFJS9930R",
+            //            Barrio = new Barrio() { IdBarrio = 3, Nombre = "Palermo" },
+            //            Precio = 120000,
+            //            Estado = Estado.Disponible,
+            //        }
+            //        );
+            modelBuilder.Entity<Rol>().HasData(
+                new Rol
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "administrador"
+                },
+                new Rol
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "comercial"
+                },
+                new Rol
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "vendedor"
+                }
+                );
+        }
 
     }
 }

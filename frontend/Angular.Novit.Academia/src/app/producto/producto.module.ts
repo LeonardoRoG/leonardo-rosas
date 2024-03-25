@@ -7,6 +7,8 @@ import { ProductoComponent } from './producto.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './producto-routing';
 import { IndexComponent } from './index/index.component';
+import { MaterialModule } from '../shared/material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,10 @@ import { IndexComponent } from './index/index.component';
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     ProductoDetalleComponent,
