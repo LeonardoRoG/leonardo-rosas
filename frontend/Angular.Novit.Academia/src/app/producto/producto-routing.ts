@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductoComponent } from './producto.component';
 import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
 import { NuevoProductoComponent } from './nuevo-producto/nuevo-producto.component';
 import { IndexComponent } from './index/index.component';
+import { ProductoEditComponent } from './producto-edit/producto-edit.component';
+import { ProductoListComponent } from './producto-list/producto-list.component';
 
 export const routes: Routes = [
   {
@@ -12,7 +13,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'productos',
-        component: ProductoComponent
+        component: ProductoListComponent
       },
       {
         path: 'detalle/:id',
@@ -21,6 +22,10 @@ export const routes: Routes = [
       {
         path: 'nuevo',
         component: NuevoProductoComponent
+      },
+      {
+        path: 'editar/:id',
+        component: ProductoEditComponent
       }
     ]
   }

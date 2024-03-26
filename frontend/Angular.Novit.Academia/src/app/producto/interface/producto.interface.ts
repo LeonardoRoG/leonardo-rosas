@@ -2,7 +2,7 @@ import { IBarrio } from "./barrio.interface";
 
 
 export interface IProducto{
-    id: number;
+    idProducto: number;
     codigo: string;
     barrio: IBarrio;
     precio: number;

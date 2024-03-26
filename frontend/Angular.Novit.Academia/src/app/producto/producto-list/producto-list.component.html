@@ -1,0 +1,31 @@
+<p>producto-list works!</p>
+
+<h1>{{title}}</h1>
+
+<div>
+    <button mat-raised-button color="primary" type="button" routerLink="/producto/nuevo">
+        <mat-icon fontIcon="add"></mat-icon> Agregar nuevo
+    </button>
+
+</div>
+
+<ul class="container-grid">
+    @for (item of productosList; track $index){
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title><a [routerLink]="['/producto/detalle', item.idProducto]" class="item-title">{{item.codigo}}</a></mat-card-title>
+            </mat-card-header>
+            <img style="max-width: 320px;" src="{{item.urlImagen}}" alt="Imagen">
+            <mat-card-content>
+                <br>
+                <p>Barrio: {{item.barrio.nombre}} | Estado: {{mostrarEstado(item.estado)}}</p>
+                <h3>Precio: {{item.precio}}</h3>
+            </mat-card-content>
+            <mat-card-actions>
+                <button class="button-container" mat-raised-button color="primary">Reservar</button>
+                <a [routerLink]="['/producto/editar', item.idProducto]" class="button-container" mat-raised-button color="accent">Editar</a>
+                <button class="button-container" mat-raised-button color="warn" (click)="eliminarProducto(item.idProducto)">Eliminar</button>
+            </mat-card-actions>
+        </mat-card>
+    }
+</ul>

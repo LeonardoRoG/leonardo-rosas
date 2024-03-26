@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductoComponent } from './producto/producto.component';
 import { authGuard } from './auth/guard/auth.guard';
 import { isNotAuthenticatedGuard } from './auth/guard/is-not-authenticated.guard';
 import { redireccionGuard } from './auth/guard/redireccion.guard';

@@ -1,0 +1,55 @@
+
+<h1>Editar Producto</h1>
+<mat-divider></mat-divider>
+<h3>Ingrese los datos del producto a editar: </h3>
+<br>
+<form [formGroup]="productoForm" (ngSubmit)="editarProducto()" class="login-form">
+  <div>
+    <p>Valor original: {{this.productoAEditar.codigo}}</p>
+    <mat-form-field class="item-login-form">
+      <mat-label>Código del producto:</mat-label>
+      <input matInput id="codigo" type="text" formControlName="codigo" required/>
+    </mat-form-field>
+  </div>
+  <div>
+    <p>Valor original: {{this.productoAEditar.barrio.nombre}}</p>
+    <mat-form-field formGroupName="barrio" class="item-login-form">
+      <mat-label >Barrio:</mat-label>
+      <input matInput id="barrio" type="text" formControlName="nombre" required/>
+    </mat-form-field>
+  </div>
+  <div>
+    <p>Valor original: {{this.productoAEditar.precio}}</p>
+    <mat-form-field class="item-login-form">
+      <mat-label>Precio:</mat-label>
+      <input matInput id="precio" type="number" formControlName="precio" required/>
+    </mat-form-field>
+  </div>
+  <div>
+    <p>Valor original: {{this.productoAEditar.urlImagen}}</p>
+    <mat-form-field class="item-login-form">
+      <mat-label>Imagen:</mat-label>
+      <input matInput id="urlImagen" type="text" formControlName="urlImagen" required/>
+    </mat-form-field>
+  </div>
+
+  <br>
+  <div>
+        @if (this.productoAEditar.estado == 0){
+            <p style="background: lightgreen;">El estado de este producto es disponible</p>
+        } @else if (this.productoAEditar.estado == 1){
+            <p style="background: rgb(255, 74, 74);">El estado de este producto es reservado</p>
+        } @else {
+            <p style="background: lightblue;">El estado de este producto es vendido</p>
+        }
+  </div>
+
+  <div class="button-container">
+    <button type="submit" mat-raised-button color="primary">
+      Editar producto
+    </button>
+    <button type="submit" [disabled]="disabledButton" mat-raised-button color="warn">
+        Cancelar reserva
+    </button>
+  </div>
+</form>

@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ProductoService } from '../producto.service';
 import { IProducto } from '../interface/producto.interface';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-producto-detalle',
@@ -21,14 +22,15 @@ export class ProductoDetalleComponent implements OnInit{
       .subscribe(params => {
         this.productoId = parseInt(params.get('id')!);
         console.log('Id de ruta: ', this.productoId);
+        this.obtenerProducto(this.productoId);
       })
-      this.obtenerProducto();
   }
 
-  obtenerProducto(){
-    this.productoService.getProductoPorId(this.productoId).subscribe({
+  obtenerProducto(id: number){
+    this.productoService.getProductoPorId(id).subscribe({
       next: producto => {
         this.productoObtenido = producto;
+        console.log(this.productoObtenido);
       },
       error: err => {
         console.error(err);

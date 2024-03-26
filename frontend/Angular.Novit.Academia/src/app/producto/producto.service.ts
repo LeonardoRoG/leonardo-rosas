@@ -39,4 +39,18 @@ export class ProductoService {
     return this.http.post<any>(`${this.url}/producto`, producto, {headers})
   }
 
+  deleteProducto(id: number): Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+    return this.http.delete<any>(`${this.url}/producto/${id}`, {headers});
+  }
+
+  editProducto(id: number, producto: IProducto): Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+    return this.http.put<any>(`${this.url}/producto/${id}`, producto, {headers})
+  }
+
 }

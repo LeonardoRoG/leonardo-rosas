@@ -8,7 +8,7 @@
 
 .container-grid{
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 33% 33% 33%;
     gap: 15px;
     align-items: center;
     justify-content: center;
@@ -29,4 +29,5 @@
 .item-title{
     text-decoration: none;
     font-weight: bold;
+    color: blueviolet;
 }
