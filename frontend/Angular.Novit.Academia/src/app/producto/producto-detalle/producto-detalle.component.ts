@@ -49,4 +49,19 @@ export class ProductoDetalleComponent{
     window.history.back();
   }
 
+  eliminarProducto(id: number){
+    this.productoService.deleteProducto(id).subscribe({
+      next: response => {
+        console.log('Producto eliminado: ', response);
+      },
+      error: err => {
+        console.error(err);
+      },
+      complete: () => {
+        alert('Producto eliminado.');
+        this.navegarAtras();
+      }
+    });
+  }
+
 }

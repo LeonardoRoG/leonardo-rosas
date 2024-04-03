@@ -57,9 +57,4 @@ export class ProductoListComponent implements OnInit{
     });
   }
 
-  filtrarSegunEstado(){
-    
-  }
-
-
 }

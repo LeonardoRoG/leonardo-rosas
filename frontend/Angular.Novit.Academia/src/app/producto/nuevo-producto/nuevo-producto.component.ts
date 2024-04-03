@@ -45,7 +45,12 @@ export class NuevoProductoComponent {
       },
       complete: () => {
         alert('Producto agregado');
+        this.navegarAtras();
       }
     });
+  }
+
+  navegarAtras(): void{
+    window.history.back();
   }
 }

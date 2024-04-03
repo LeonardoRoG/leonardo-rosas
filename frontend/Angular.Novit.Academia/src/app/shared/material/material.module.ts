@@ -15,7 +15,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatExpansionModule } from '@angular/material/expansion'
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [],
@@ -35,7 +36,8 @@ import { MatExpansionModule } from '@angular/material/expansion'
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSidenavModule
   ],
   imports: [
     CommonModule

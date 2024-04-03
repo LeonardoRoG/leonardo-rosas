@@ -1,24 +1,35 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer #drawer style="position: fixed;">
+    <div>
+      <br>
+      <p *ngIf="this.isAuthenticated" class="btn"><strong>Hola, {{currentUserLogin?.name}}</strong></p>
+      <br>
+    </div>
+        @if (this.isAuthenticated && currentUserLogin?.role === 'vendedor'){
+      <div class="btn">
+        <a mat-button routerLink="/producto/productos" routerLinkActive="active" ariaCurrentWhenActive="page">Productos</a>
+        <br>
+        <button mat-button routerLink="/reserva/reservas" routerLinkActive="active" ariaCurrentWhenActive="page">Reservas</button>
+      </div>
+    } @else if (this.isAuthenticated && currentUserLogin?.role === 'comercial') {
+      <div class="btn">
+        <button mat-button routerLink="/reserva/reservas" routerLinkActive="active" ariaCurrentWhenActive="page">Reservas</button>
+      </div>
+    }
+  </mat-drawer>
+  <mat-drawer-content>
 
 <mat-toolbar color="primary" class="header">
   <nav class="nav container">
     <div>
-      <button mat-flat-button color="primary"><mat-icon fontIcon="home"></mat-icon>
-        Housing
+      <button *ngIf="this.isAuthenticated" type="button" mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
       </button>
+      Housing App
     </div>
-    @if (this.isAuthenticated && currentUserLogin?.role === 'vendedor'){
-      <div>
-        <a mat-flat-button color="primary" routerLink="/producto/productos" routerLinkActive="active" ariaCurrentWhenActive="page">Productos</a>
-        <button mat-flat-button color="primary" routerLink="/reserva/reservas" routerLinkActive="active" ariaCurrentWhenActive="page">Reservas</button>
-      </div>
-    } @else if (this.isAuthenticated && currentUserLogin?.role === 'comercial') {
-      <div>
-        <button mat-flat-button color="primary" routerLink="/reserva/reservas" routerLinkActive="active" ariaCurrentWhenActive="page">Reservas</button>
-      </div>
-    }
+
     <div>
       @if (this.isAuthenticated) {
-        <button mat-flat-button disabled class="item-nav">{{currentUserLogin?.name}}</button>
         <button mat-flat-button color="warn" class="item-nav" (click)="logout()" routerLink="/">
             <mat-icon fontIcon="logout"></mat-icon> Salir
         </button>
@@ -33,13 +44,16 @@
 
 
 
+
 <main class="container main">
-
+  
   <div>
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
-
+  
 </main>
+
+
 
 <br>
 <mat-divider></mat-divider>
@@ -50,3 +64,6 @@
     <p>Alejo Leonardo Rosas</p>
   </div>
 </footer>
+
+</mat-drawer-content>
+</mat-drawer-container>

@@ -7,3 +7,30 @@
 .item-login-form {
     width: 100%;
 }
+
+.status-Disponible {
+    color: white;
+    background-color: rgb(0, 187, 40);
+    font-weight: 500;
+    padding: 2px 5px;
+    border-radius: 3px;
+    text-align: center;
+}
+  
+.status-Reservado {
+    color: white;
+    background-color: rgb(223, 94, 19);
+    font-weight: 500;
+    padding: 2px 5px;
+    border-radius: 3px;
+    text-align: center;
+}
+  
+.status-Vendido {
+    color: white;
+    background-color: rgb(42, 124, 218);
+    font-weight: 500;
+    padding: 2px 5px;
+    border-radius: 3px;
+    text-align: center;
+}

@@ -47,12 +47,23 @@ export class ProductoEditComponent implements OnInit {
     });
   }
 
-
+  navegarAtras(): void{
+    window.history.back();
+  }
 
   obtenerProducto(id: number) {
     this.productoService.getProductoPorId(id).subscribe({
       next: (producto) => {
         this.productoAEditar = producto;
+        this.productoForm = this.fb.group({
+          codigo: [this.productoAEditar.codigo, Validators.required],
+          barrio: this.fb.group({
+            nombre: [this.productoAEditar.barrio.nombre, Validators.required],
+          }),
+          precio: [this.productoAEditar.precio, Validators.required],
+          urlImagen: [this.productoAEditar.urlImagen, Validators.required],
+          estado: [this.productoAEditar.estado, Validators.required],
+        });
       },
       error: (err) => {
         console.error(err);

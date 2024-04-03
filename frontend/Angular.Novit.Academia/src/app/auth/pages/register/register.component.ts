@@ -15,6 +15,8 @@ export class RegisterComponent {
   private router = inject(Router);
 
   selectedValue!: string;
+  // La idea del rol administrador es para gestionar las cuentas creadas y modificar roles o permisos
+  // Por eso ahora no tiene funcionalidades en la app pero se pueden agregar a futuro
   roles: string[] = ['administrador','vendedor','comercial'];
 
   hide = true;

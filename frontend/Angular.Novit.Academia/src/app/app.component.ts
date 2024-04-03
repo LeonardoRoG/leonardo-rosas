@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
   isAuthenticated: boolean = false;
   title = 'Housing';
+  showFiller = false;
 
   currentUserLogin?: User;
 

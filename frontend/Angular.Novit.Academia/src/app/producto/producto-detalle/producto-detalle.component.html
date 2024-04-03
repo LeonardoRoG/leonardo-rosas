@@ -3,16 +3,18 @@
 <br>
 <div class="flexbox">
     <span>
-        <img style="max-width: 400px; border-radius: 15px;" src="{{productoObtenido.urlImagen}}" alt="Imagen">
+        <img class="imagen" *ngIf="(productoObtenido.urlImagen != ' ')" src="{{productoObtenido.urlImagen}}" alt="Imagen">
+        <img class="imagen" *ngIf="(productoObtenido.urlImagen == ' ')" src="https://image.pngaaa.com/700/5273700-middle.png" alt="Imagen">
     </span>
     <div>
         <h2>{{this.productoObtenido.codigo}}</h2>
-        <p>Barrio: {{this.productoObtenido.barrio.nombre}} | Estado: {{mostrarEstado(this.productoObtenido.estado)}}</p>
-        <p>Precio: {{this.productoObtenido.precio}}</p>
+        <p>Barrio: {{this.productoObtenido.barrio.nombre}}</p>
+        <p>Estado: {{mostrarEstado(this.productoObtenido.estado)}}</p>
+        <p>Precio: {{this.productoObtenido.precio | currency}}</p>
     </div>
     <div>
-        <button mat-raised-button color="primary">Reservar</button>
-        <button mat-raised-button>Editar</button>
-        <button mat-raised-button color="warn">Eliminar</button>
+        <a [disabled]="productoObtenido.estado != 0" [routerLink]="['/reserva/nueva', productoObtenido.idProducto]" class="button-container" mat-raised-button color="primary">Reservar</a>
+        <a [routerLink]="['/producto/editar', productoObtenido.idProducto]" class="button-container" mat-raised-button color="accent">Editar</a>
+        <button class="button-container" mat-raised-button color="warn" (click)="eliminarProducto(productoObtenido.idProducto)">Eliminar</button>
     </div>
 </div>
