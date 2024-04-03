@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReservaComponent } from './reserva.component';
-import { ReservaDetalleComponent } from './reserva-detalle/reserva-detalle.component';
 import { NuevaReservaComponent } from './nueva-reserva/nueva-reserva.component';
 import { IndexComponent } from './index/index.component';
+import { ReservaListComponent } from './reserva-list/reserva-list.component';
 
 export const routes: Routes = [
   {
@@ -12,14 +11,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'reservas',
-        component: ReservaComponent
+        component: ReservaListComponent
       },
       {
-        path: 'detalles',
-        component: ReservaDetalleComponent
-      },
-      {
-        path: 'nueva',
+        path: 'nueva/:id',
         component: NuevaReservaComponent
       }
     ]

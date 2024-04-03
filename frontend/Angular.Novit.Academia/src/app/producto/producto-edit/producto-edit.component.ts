@@ -24,10 +24,8 @@ export class ProductoEditComponent implements OnInit {
   estadoProducto: string[] = ['disponible', 'reservado', 'vendido'];
 
   ngOnInit(): void {
-    console.log('ngOnInit');
     this.activatedRoute.paramMap.subscribe((params) => {
       this.productoId = parseInt(params.get('id')!);
-      console.log('Id ruta a editar: ', this.productoId);
       this.obtenerProducto(this.productoId);
     });
     if (this.productoAEditar.estado == 1) {
@@ -38,7 +36,6 @@ export class ProductoEditComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder) {
-    console.log('constructor');
     this.productoForm = this.fb.group({
       codigo: ['', Validators.required],
       barrio: this.fb.group({
@@ -50,11 +47,12 @@ export class ProductoEditComponent implements OnInit {
     });
   }
 
+
+
   obtenerProducto(id: number) {
     this.productoService.getProductoPorId(id).subscribe({
       next: (producto) => {
         this.productoAEditar = producto;
-        console.log(this.productoAEditar);
       },
       error: (err) => {
         console.error(err);
@@ -64,7 +62,6 @@ export class ProductoEditComponent implements OnInit {
 
   editarProducto() {
     const editProducto = this.productoForm.value as IProducto;
-    console.log('Producto a editar: ', editProducto);
     editProducto.estado = this.productoAEditar.estado;
 
     this.productoService.editProducto(this.productoId, editProducto).subscribe({

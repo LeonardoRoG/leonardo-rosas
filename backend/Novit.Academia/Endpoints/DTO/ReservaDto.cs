@@ -19,6 +19,7 @@ public class ReservaResponseDto
     public required ProductoResponseDto Producto { get; set; }
     public required EstadoReserva EstadoReserva { get; set; }
     public bool SolicitarAprobacion { get; set; }
+    public required UsuarioReservaDto Usuario { get; set; }
 }
 
 public class ReservaRequestDto

@@ -1,15 +1,14 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../producto.service';
 import { IProducto } from '../interface/producto.interface';
-import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-producto-detalle',
   templateUrl: './producto-detalle.component.html',
   styleUrl: './producto-detalle.component.css'
 })
-export class ProductoDetalleComponent implements OnInit{
+export class ProductoDetalleComponent{
   
   private activatedRoute = inject(ActivatedRoute);
   private productoService = inject(ProductoService);
@@ -17,20 +16,15 @@ export class ProductoDetalleComponent implements OnInit{
   productoId: number = 0;
   productoObtenido!: IProducto;
   
-  ngOnInit(): void {
-    this.activatedRoute.paramMap
-      .subscribe(params => {
-        this.productoId = parseInt(params.get('id')!);
-        console.log('Id de ruta: ', this.productoId);
-        this.obtenerProducto(this.productoId);
-      })
+  constructor(){
+    this.productoId = this.activatedRoute.snapshot.params['id'];
+    this.obtenerProducto(this.productoId);
   }
 
   obtenerProducto(id: number){
     this.productoService.getProductoPorId(id).subscribe({
       next: producto => {
         this.productoObtenido = producto;
-        console.log(this.productoObtenido);
       },
       error: err => {
         console.error(err);
@@ -49,6 +43,10 @@ export class ProductoDetalleComponent implements OnInit{
       return 'Vendido';
     }
     return;
+  }
+
+  navegarAtras(): void{
+    window.history.back();
   }
 
 }

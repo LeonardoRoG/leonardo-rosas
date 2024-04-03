@@ -10,6 +10,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule} from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion'
 
 @NgModule({
   declarations: [],
@@ -23,7 +29,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSelectModule,
     MatGridListModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTooltipModule,
+    MatExpansionModule
   ],
   imports: [
     CommonModule

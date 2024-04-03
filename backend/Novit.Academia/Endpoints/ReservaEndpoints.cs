@@ -30,7 +30,7 @@ public class ReservaEndpoints : ICarterModule
             .WithTags("Reserva")
             .RequireAuthorization(new AuthorizeAttribute { Roles = "vendedor, comercial" });
 
-        app.MapPost("/{idProducto:int}/Producto", (IReservaService reservaService, int idProducto, [FromBody] ReservaRequestDto reservaDto) =>
+        app.MapPost("/{idProducto:int}", (IReservaService reservaService, int idProducto, [FromBody] ReservaRequestDto reservaDto) =>
         {
             var producto = reservaService.AddReserva(idProducto, reservaDto);
             return Results.Ok();

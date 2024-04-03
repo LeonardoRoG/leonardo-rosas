@@ -1,0 +1,19 @@
+
+<div class="charts" style="max-width: 650px;">
+    <canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [type]="'bar'">
+    </canvas>
+
+    <canvas baseChart style="max-width: 450px; max-height: 450px;"
+        [type]="'pie'"
+        [datasets]="pieChartDatasets"
+        [labels]="pieChartLabels"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend">
+  </canvas>
+</div>

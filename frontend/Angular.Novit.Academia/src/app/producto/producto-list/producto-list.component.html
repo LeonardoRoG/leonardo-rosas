@@ -1,5 +1,3 @@
-<p>producto-list works!</p>
-
 <h1>{{title}}</h1>
 
 <div>
@@ -10,22 +8,28 @@
 </div>
 
 <ul class="container-grid">
-    @for (item of productosList; track $index){
+    @for (item of productosList; track item.idProducto){
         <mat-card>
-            <mat-card-header>
+            <mat-card-header class="card-header">
                 <mat-card-title><a [routerLink]="['/producto/detalle', item.idProducto]" class="item-title">{{item.codigo}}</a></mat-card-title>
             </mat-card-header>
-            <img style="max-width: 320px;" src="{{item.urlImagen}}" alt="Imagen">
+            <img class="imagen" *ngIf="(item.urlImagen != ' ')" src="{{item.urlImagen}}" alt="Imagen">
+            <img class="imagen" *ngIf="(item.urlImagen == ' ')" src="https://image.pngaaa.com/700/5273700-middle.png" alt="Imagen">
             <mat-card-content>
                 <br>
-                <p>Barrio: {{item.barrio.nombre}} | Estado: {{mostrarEstado(item.estado)}}</p>
-                <h3>Precio: {{item.precio}}</h3>
+                <div class="flexbox">
+                    <p class="barrio">Barrio: {{item.barrio.nombre}}</p>
+                    <p ngClass="status-{{mostrarEstado(item.estado)}}">{{mostrarEstado(item.estado)}}</p>
+                </div>
+                <h3 class="precio">Precio: {{item.precio | currency}}</h3>
             </mat-card-content>
             <mat-card-actions>
-                <button class="button-container" mat-raised-button color="primary">Reservar</button>
+                <a [disabled]="item.estado != 0" [routerLink]="['/reserva/nueva', item.idProducto]" class="button-container" mat-raised-button color="primary">Reservar</a>
                 <a [routerLink]="['/producto/editar', item.idProducto]" class="button-container" mat-raised-button color="accent">Editar</a>
                 <button class="button-container" mat-raised-button color="warn" (click)="eliminarProducto(item.idProducto)">Eliminar</button>
             </mat-card-actions>
         </mat-card>
+    } @empty {
+        <p>No hay items.</p>
     }
 </ul>

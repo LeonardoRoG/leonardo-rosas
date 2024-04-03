@@ -22,6 +22,10 @@ public class AccountEndpoints(IConfiguration configuration) : ICarterModule
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
+            var usuarios = context.Usuarios.Where(x => x.Username == request.Username).FirstOrDefault();
+            if (usuarios != null)
+                return Results.BadRequest("El username ya existe");
+
             var user = new Usuario()
             {
                 Id = Guid.NewGuid(),

@@ -1,33 +1,106 @@
-.flexbox{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 2px solid gainsboro;
-    border-radius: 10px;
+.barrio{
+  background-color: rgb(255, 255, 255);
+  font-weight: 500;
+  padding: 2px 5px;
+  border-radius: 0px 3px 3px 0px;
+  box-shadow: 0px 0px 5px rgb(182, 182, 182);
+  border-left: 4px solid rgb(182, 182, 182);
 }
 
-.container-grid{
+.button-container {
+  margin: auto 5px;
+}
+
+.container-grid {
+  display: grid;
+  grid-template-columns: 300px 300px 300px 300px;
+  gap: 15px;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 5px;
+}
+
+.container-item {
+  border-radius: 15px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.imagen{
+    max-width: 320px;
+}
+
+.item-title {
+  text-decoration: none;
+  font-weight: bold;
+  color: blueviolet;
+}
+
+.precio{
+    text-align: center;
+    font-weight: 500;
+}
+
+.status-Disponible {
+  color: white;
+  background-color: rgb(0, 187, 40);
+  font-weight: 500;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.status-Reservado {
+  color: white;
+  background-color: rgb(223, 94, 19);
+  font-weight: 500;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.status-Vendido {
+  color: white;
+  background-color: rgb(42, 124, 218);
+  font-weight: 500;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+@media screen and (max-width: 1440px) {
+  .container-grid {
     display: grid;
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 300px 300px 300px;
     gap: 15px;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     padding: 5px;
+  }
 }
 
-.container-item{
-    border-radius: 15px;
+@media screen and (max-width: 960px) {
+  .container-grid {
     display: grid;
-    align-items: center;
+    grid-template-columns: 300px 300px;
+    gap: 15px;
+    align-items: flex-end;
     justify-content: center;
+    padding: 5px;
+  }
 }
 
-.button-container{
-    margin: auto 5px;
-}
-
-.item-title{
-    text-decoration: none;
-    font-weight: bold;
-    color: blueviolet;
+@media screen and (max-width: 640px) {
+  .container-grid {
+    display: grid;
+    grid-template-columns: 300px;
+    gap: 15px;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 5px;
+  }
 }

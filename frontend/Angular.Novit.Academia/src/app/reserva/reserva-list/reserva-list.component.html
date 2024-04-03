@@ -1,0 +1,137 @@
+<h1>{{ title }}</h1>
+
+@if (this.currentUser?.role === 'vendedor') {
+  <h2>Mis reservas</h2>
+} @else {
+  <h2>Resumen</h2>
+}
+<section class="section-resumen">
+  <div id="outer-grid">
+    <div id="inner-grid">
+      <div>
+        <h2>Total de reservas: {{ this.totalReservas }}</h2>
+      </div>
+      <mat-divider></mat-divider>
+      <div>Ingresadas: {{ this.reservasIngresadas }}</div>
+    </div>
+    <div id="inner-grid">
+      <div>Aprobadas: {{ this.reservasAprobadas }}</div>
+      <div>Canceladas: {{ this.reservasCanceladas }}</div>
+      <div>Rechazadas: {{ this.reservasRechazadas }}</div>
+    </div>
+  </div>
+</section>
+
+<br />
+
+<h2>Reservas y acciones</h2>
+<section>
+  @for (item of reservasList; track item.idReserva){ @if ((item.usuario.username ===
+  this.currentUser?.name) || this.currentUser?.role === 'comercial') {
+  <article>
+    <div class="flexbox">
+      <p ngClass="status-{{ mostrarEstado(item.estadoReserva) }}">
+        {{ mostrarEstado(item.estadoReserva) }}
+      </p>
+      <div class="intern-article">
+        @if (item.solicitarAprobacion && item.estadoReserva == 0) {
+        <h2 class="title-items">
+          ID Reserva: {{ item.idReserva }}
+          <mat-icon fontIcon="check_circle" color="primary" matTooltip="Solicitada"></mat-icon>
+        </h2>
+        } @else {
+        <h2>ID Reserva: {{ item.idReserva }}</h2>
+        }
+        <div class="buttons">
+          @if (this.currentUser?.role == 'vendedor') {
+          <button [disabled]="item.estadoReserva != 0" (click)="cancelarReserva(item.idReserva)" mat-raised-button color="warn">
+            <mat-icon>cancel</mat-icon>Cancelar reserva
+          </button>
+          } @else {
+          <button [disabled]="item.estadoReserva != 0" (click)="aprobarReserva(item.idReserva)" mat-raised-button color="primary" matTooltip="Aprobar reserva">
+            <mat-icon>check</mat-icon>Aprobar
+          </button>
+          <button [disabled]="item.estadoReserva != 0" (click)="rechazarReserva(item.idReserva)" mat-raised-button color="warn" matTooltip="Rechazar reserva">
+            <mat-icon>cancel</mat-icon>Rechazar
+          </button>
+          }
+        </div>
+      </div>
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Código de producto: </mat-panel-title>
+            <mat-panel-description>
+              {{ item.producto.codigo }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <img src="{{item.producto.urlImagen}}" class="imagen-miniatura" alt="Imagen">
+          <p>Barrio: {{ item.producto.barrio.nombre }}</p>
+          <p>Precio: {{ item.producto.precio | currency }}</p>
+          <button *ngIf="currentUser?.role === 'vendedor'" mat-raised-button [routerLink]="['/producto/detalle', item.producto.idProducto]">Ver Producto</button>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Cliente: </mat-panel-title>
+            <mat-panel-description>
+              {{ item.cliente.nombre }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>Número de cliente: {{ item.cliente.id }}</p>
+        </mat-expansion-panel>
+        @if (this.currentUser?.role === 'comercial') {
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Vendedor: </mat-panel-title>
+              <mat-panel-description>
+                {{ item.usuario.username }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        }
+      </mat-accordion>
+    </div>
+  </article>
+  <br />
+} } @empty {
+  <p>No hay items.</p>
+}
+</section>
+
+<h2>Todas las reservas</h2>
+<table mat-table [dataSource]="reservasList" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="idReserva">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.idReserva }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="usuario">
+    <th mat-header-cell *matHeaderCellDef>Usuario</th>
+    <td mat-cell *matCellDef="let element">{{ element.usuario.username }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="cliente">
+    <th mat-header-cell *matHeaderCellDef>Cliente</th>
+    <td mat-cell *matCellDef="let element">{{ element.cliente.nombre }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="producto">
+    <th mat-header-cell *matHeaderCellDef>Producto</th>
+    <td mat-cell *matCellDef="let element">{{ element.producto.codigo }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="estadoReserva">
+    <th mat-header-cell *matHeaderCellDef>Estado</th>
+    <td mat-cell *matCellDef="let element">
+      {{ mostrarEstado(element.estadoReserva) }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

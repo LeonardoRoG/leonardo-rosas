@@ -1,4 +1,6 @@
-
+<button mat-raised-button color="primary" (click)="navegarAtras()"><mat-icon fontIcon="arrow_back"></mat-icon>Volver</button>
+<br>
+<br>
 <div class="flexbox">
     <span>
         <img style="max-width: 400px; border-radius: 15px;" src="{{productoObtenido.urlImagen}}" alt="Imagen">
@@ -6,7 +8,7 @@
     <div>
         <h2>{{this.productoObtenido.codigo}}</h2>
         <p>Barrio: {{this.productoObtenido.barrio.nombre}} | Estado: {{mostrarEstado(this.productoObtenido.estado)}}</p>
-        <h3>Precio: {{this.productoObtenido.precio}}</h3>
+        <p>Precio: {{this.productoObtenido.precio}}</p>
     </div>
     <div>
         <button mat-raised-button color="primary">Reservar</button>

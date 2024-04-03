@@ -10,6 +10,8 @@ import { enviroment } from '../enviroments/enviroments';
 })
 export class ProductoService {
 
+  title: string = 'Sección productos'
+  
   private http = inject(HttpClient);
   private authService = inject(AuthService);
   private readonly url = enviroment.apiUrl;
@@ -23,7 +25,6 @@ export class ProductoService {
     return this.http.get<any>(`${this.url}/producto`, {headers});
   }
 
-  title: string = 'Sección productos'
 
   getProductoPorId(id: number): Observable<any>{
     const headers = new HttpHeaders({

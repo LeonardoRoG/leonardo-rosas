@@ -1,13 +1,19 @@
+import { User, UserReserva } from "../../auth/interface/user.interface";
+import { IProducto } from "../../producto/interface/producto.interface";
+import { Cliente } from "./cliente.interface";
+
 export interface IReserva{
-    id: number;
-    cliente: string;
-    productoId: number;
-    estadoReserva: EEstadoReserva;
+    cliente: Cliente;
+    estadoReserva: number;
+    solicitarAprobacion: boolean;
+    usuario: UserReserva;
 }
 
-export enum EEstadoReserva{
-    Ingresada = 'Ingresada',
-    Aprobada = 'Aprobada',
-    Cancelada = 'Cancelada',
-    Rechazada = 'Rechazada'
+export interface IReservaList{
+    idReserva: number;
+    cliente: Cliente;
+    producto: IProducto;
+    estadoReserva: number;
+    solicitarAprobacion: boolean;
+    usuario: UserReserva;
 }

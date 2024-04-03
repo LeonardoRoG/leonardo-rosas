@@ -1,33 +1,39 @@
 
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="header">
   <nav class="nav container">
+    <div>
+      <button mat-flat-button color="primary"><mat-icon fontIcon="home"></mat-icon>
+        Housing
+      </button>
+    </div>
+    @if (this.isAuthenticated && currentUserLogin?.role === 'vendedor'){
       <div>
-        <button mat-flat-button color="primary"><mat-icon fontIcon="home"></mat-icon>Housing</button>
+        <a mat-flat-button color="primary" routerLink="/producto/productos" routerLinkActive="active" ariaCurrentWhenActive="page">Productos</a>
+        <button mat-flat-button color="primary" routerLink="/reserva/reservas" routerLinkActive="active" ariaCurrentWhenActive="page">Reservas</button>
       </div>
-      @if (this.isAuthenticated){
-        <div>
-            <a mat-flat-button color="primary" routerLink="/producto/productos" routerLinkActive="active" ariaCurrentWhenActive="page">Productos</a>
-            <button mat-flat-button color="primary" routerLink="/reserva/reservas" routerLinkActive="active" ariaCurrentWhenActive="page">Reservas</button>
-        </div>
+    } @else if (this.isAuthenticated && currentUserLogin?.role === 'comercial') {
+      <div>
+        <button mat-flat-button color="primary" routerLink="/reserva/reservas" routerLinkActive="active" ariaCurrentWhenActive="page">Reservas</button>
+      </div>
+    }
+    <div>
+      @if (this.isAuthenticated) {
+        <button mat-flat-button disabled class="item-nav">{{currentUserLogin?.name}}</button>
+        <button mat-flat-button color="warn" class="item-nav" (click)="logout()" routerLink="/">
+            <mat-icon fontIcon="logout"></mat-icon> Salir
+        </button>
+      } @else {
+        <button mat-flat-button color="accent" routerLink="/auth">
+          <mat-icon fontIcon="login"></mat-icon> Ingresar
+        </button>
       }
-      <div>
-          @if (this.isAuthenticated) {
-              <button mat-flat-button disabled class="item-nav">{{currentUserLogin?.name}}</button>
-              <button mat-flat-button color="warn" class="item-nav" (click)="logout()" routerLink="/">
-                  <mat-icon fontIcon="logout"></mat-icon> Salir
-              </button>
-          } @else {
-              <button mat-flat-button color="accent" routerLink="/auth">
-                <mat-icon fontIcon="login"></mat-icon> Ingresar
-              </button>
-          }
-      </div>
+    </div>
   </nav>
-
 </mat-toolbar>
 
 
-<main class="container">
+
+<main class="container main">
 
   <div>
       <router-outlet></router-outlet>
@@ -35,8 +41,12 @@
 
 </main>
 
-<mat-toolbar color="primary">
-  <div class="container">
-      <h3>Footer</h3>
+<br>
+<mat-divider></mat-divider>
+
+<footer color="primary" class="container">
+  <div class="footer">
+    <h3>Housing App - Academia Novit 2024</h3>
+    <p>Alejo Leonardo Rosas</p>
   </div>
-</mat-toolbar>
+</footer>

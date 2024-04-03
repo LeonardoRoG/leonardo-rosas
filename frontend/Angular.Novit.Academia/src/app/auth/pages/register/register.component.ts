@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserRegister } from '../../interface';
+import { UserLogin, UserRegister } from '../../interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,7 @@ import { UserRegister } from '../../interface';
 export class RegisterComponent {
 
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   selectedValue!: string;
   roles: string[] = ['administrador','vendedor','comercial'];
@@ -35,7 +37,6 @@ export class RegisterComponent {
       password: password,
       role: role
     };
-    console.log(newUser);
     
     this.authService.register(newUser).subscribe({
       next: (userCreado) => {
@@ -44,6 +45,10 @@ export class RegisterComponent {
       },
       error: err => {
         console.log(err);
+        alert('Error.')
+      },
+      complete: () => {
+        alert('Usuario creado.');
       }
     });
   }

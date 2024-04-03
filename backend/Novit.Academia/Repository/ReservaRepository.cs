@@ -31,14 +31,18 @@ public class ReservaRepository(AppDbContext context) : IReservaRepository
         // Si el producto ya está reservado lanza una excepción
         if (producto.Estado == Estado.Reservado)
             throw new Exception($"El producto con id {idProducto} ya tiene una reserva.");
+        
+        var usuario = context.Usuarios.Where(x => x.Username == reservaDto.Usuario.Username).FirstOrDefault();
+        if (usuario == null)
+            throw new Exception("El usuario no existe.");
 
         // Busco las reservas hechas por el usuario y si tiene más de 3 lanza una excepción
         var reservas = context.Reservas.Include(x => x.Usuario)
-                                       .Where(x => x.Usuario == reservaDto.Usuario.Adapt<Usuario>())
+                                       .Where(x => x.Usuario == usuario)
                                        .Where(x => x.EstadoReserva == EstadoReserva.Ingresada)
                                        .ToList();
 
-        if (reservas.Count > 3)
+        if (reservas.Count >= 3)
             throw new Exception($"El usuario ya tiene 3 reservas ingresadas.");
 
         reservaDto.EstadoReserva = EstadoReserva.Ingresada;
@@ -73,7 +77,7 @@ public class ReservaRepository(AppDbContext context) : IReservaRepository
             Producto = producto,
             EstadoReserva = reservaDto.EstadoReserva,
             SolicitarAprobacion = reservaDto.SolicitarAprobacion,
-            Usuario = reservaDto.Usuario.Adapt<Usuario>(),
+            Usuario = usuario,
         };
 
         context.Reservas.Add(reserva);

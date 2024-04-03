@@ -13,9 +13,10 @@ public class ReservaMapper : IRegister
             .Map(des => des.Producto, src => src.Producto)
             .Map(des => des.Usuario, src => src.Usuario)
             .Map(des => des.EstadoReserva, src => src.EstadoReserva);
-                
+
         config.NewConfig<ReservaDto, ReservaResponseDto>()
             .Map(des => des.Cliente, src => src.Cliente)
+            .Map(des => des.Usuario, src => src.Usuario)
             .Map(des => des.Producto, src => src.Producto);
 
         config.NewConfig<ReservaDto, ReservaRequestDto>()

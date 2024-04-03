@@ -13,16 +13,15 @@ public class UsuarioRegisterDto : UsuarioDto
 
 public class UsuarioReservaDto
 {
-    public Guid Id { get; set; }
     public string Username { get; set; } = string.Empty;
 }
 
 public class UsuarioReservaRequestDto
 {
-    public Guid Id { get; set; }
+    public string Username { get; set; } = string.Empty;
 }
 
 public class UsuarioReservaResponseDto
 {
-    public string Userame { get; set; } = string.Empty;
+    public string Username { get; set; } = string.Empty;
 }

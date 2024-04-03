@@ -1,0 +1,95 @@
+.buttons{
+  justify-self: end;
+}
+
+.flexbox {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 0px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 7px rgb(182, 182, 182);
+}
+
+.imagen-miniatura{
+  max-width: 200px;
+  border-radius: 5px;
+}
+
+.intern-article{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-evenly;
+  padding: 0px 24px;
+}
+
+.section-resumen{
+  padding: 2px 5px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 7px rgb(182, 182, 182);
+}
+
+.status-Ingresada {
+  color: white;
+  background-color: rgb(25, 204, 2);
+  font-weight: 500;
+  text-align: center;
+  padding: 2px 5px;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.status-Cancelada {
+  color: white;
+  background-color: rgb(223, 94, 19);
+  font-weight: 500;
+  text-align: center;
+  padding: 2px 5px;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.status-Aprobada {
+  color: white;
+  background-color: rgb(42, 124, 218);
+  font-weight: 500;
+  text-align: center;
+  padding: 2px 5px;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.status-Rechazada {
+  color: white;
+  background-color: rgb(233, 29, 29);
+  font-weight: 500;
+  text-align: center;
+  padding: 2px 5px;
+  border-radius: 3px 3px 0px 0px;
+}
+
+.title-items {
+  display: flex;
+  align-items: center;
+}
+
+#outer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+}
+#outer-grid > div {
+  color: rgb(160, 160, 160);
+  font-size: large;
+  padding: 8px;
+}
+#inner-grid {
+  display: grid;
+  grid-gap: 5px;
+}
+#inner-grid > div {
+  padding: 8px;
+  border-radius: 3px;
+}
+
+#outer-grid > #inner-grid{
+  border-left: 2px;
+}

@@ -9,7 +9,7 @@ import { ReservaModule } from './reserva/reserva.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './shared/material/material.module';
-
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -22,10 +22,11 @@ import { MaterialModule } from './shared/material/material.module';
     AuthModule,
     ProductoModule,
     ReservaModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideCharts(withDefaultRegisterables())
   ],
   bootstrap: [AppComponent]
 })

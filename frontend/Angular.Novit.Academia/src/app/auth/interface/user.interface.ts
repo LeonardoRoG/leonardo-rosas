@@ -3,3 +3,7 @@ export interface User {
   role: string;
   exp: number;
 }
+
+export interface UserReserva {
+  username: string;
+}

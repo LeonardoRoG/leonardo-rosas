@@ -1,1 +1,21 @@
-<p>nueva-reserva works!</p>
+<h1>Nueva Reserva</h1>
+<mat-divider></mat-divider>
+<h3>Ingrese los datos para la reserva: </h3>
+<br>
+<form [formGroup]="reservaForm" (ngSubmit)="agregarReserva()" class="login-form">
+  <div>
+    <mat-form-field formGroupName="cliente" class="item-login-form">
+      <mat-label >Nombre del cliente:</mat-label>
+      <input matInput id="cliente" type="text" formControlName="nombre" required/>
+    </mat-form-field>
+  </div>
+  <div class="item-login-form">
+    <p><mat-checkbox formControlName="solicitarAprobacion">Solicitar aprobación</mat-checkbox></p>
+  </div>
+
+  <div class="button-container">
+    <button type="submit" mat-raised-button color="primary">
+      Agregar reserva
+    </button>
+  </div>
+</form>

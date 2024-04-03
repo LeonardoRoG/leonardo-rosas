@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { IProducto } from '../interface/producto.interface';
 import { ProductoService } from '../producto.service';
 
@@ -12,11 +11,10 @@ export class ProductoListComponent implements OnInit{
 
   title: string = 'Productos'
   private productoService = inject(ProductoService);
-  private router = inject(Router);
   
   productosList: IProducto[] = [];
   
-  ngOnInit(): void {
+  cargarLista(){
     this.productoService.getProductos().subscribe({
       next: (productos) => {
         this.productosList = productos;
@@ -25,6 +23,10 @@ export class ProductoListComponent implements OnInit{
         console.log(err);
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.cargarLista();
   }
 
   mostrarEstado(estado: number){
@@ -43,15 +45,21 @@ export class ProductoListComponent implements OnInit{
   eliminarProducto(id: number){
     this.productoService.deleteProducto(id).subscribe({
       next: response => {
-        console.log('Producto eliminado: ', id);
+        console.log('Producto eliminado: ', response);
       },
       error: err => {
         console.error(err);
       },
       complete: () => {
-        this.router.navigateByUrl('/producto/productos')
+        alert('Producto eliminado.');
+        this.cargarLista();
       }
     });
   }
+
+  filtrarSegunEstado(){
+    
+  }
+
 
 }
