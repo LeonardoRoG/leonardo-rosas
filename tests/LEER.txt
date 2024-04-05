@@ -1,0 +1,7 @@
+Para los test se debe utilizar 'http' en lugar de 'https', sino da error de certificados.
+
+Hay 4 archivos diferentes de peticiones de productos o reservas según el rol. 2 para el rol vendedor y 2 para el comercial.
+
+El rol de administrador está sólo para la administración de cuentas pero se debe ignorar porque no se lo utiliza en la aplicación.
+
+Se debe utilizar el token correspondiente para la autorización en cada caso.
