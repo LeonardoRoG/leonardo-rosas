@@ -1,15 +1,15 @@
-#Housing App
-##Aplicación web de gestión de reservas de productos inmobiliarios
-####Trabajo final para la Academia Novit 2024
+# Housing App
+## Aplicación web de gestión de reservas de productos inmobiliarios
+#### Trabajo final para la Academia Novit 2024
 
 El presente proyecto fué realizado con las siguientes tecnologías:
-#####Backend
+##### Backend
 Se utilizó .NET con una WebAPI (minimal API) y como ORM Entity Framework Core.
-#####Frontend
+##### Frontend
 Compuesto por Angular con Angular Material UI y HTML y CSS puro.
-#####Base de datos
+##### Base de datos
 La persistencia de datos fué hecha en SQLite.
-#####Extras
+##### Extras
 Posee archivos Dockerfile y tests de KarateLabs.
 
 La aplicación cuenta con un inicio de sesión para todos los usuarios, existiendo roles de vendedor, comercial y administrador.
@@ -20,7 +20,7 @@ En cuanto a los usuarios con rol comercial:
 - Pueden aprobar o rechazar reservas.
 - Visualizar un reporte gráfico de ventas de cada vendedor.
 
-#####Reglas de negocio
+##### Reglas de negocio
 - De cada producto se informa un código (alfanumérico), un barrio, el precio y un enlace a una imagen ilustrativa.
 - Los posibles estados de un producto son disponible, reservado y vendido.
 - Los posibles estados de una reserva son ingresada, cancelada, aprobada y rechazada.
